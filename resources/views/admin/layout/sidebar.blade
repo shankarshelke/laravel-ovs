@@ -1,0 +1,109 @@
+<!-- header section start-->
+<style type="text/css">
+    .notification-image-section{float:left;}
+    .notification-name{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;display: block;margin-left: 40px;margin-top: 3px;}
+    .dropdown-list.normal-list{width: 300px; }
+    .msg{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;display: block;margin-top: 3px;}
+</style>
+    <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn menu-btn-section"><i class="icon-menu"></i></a>
+        <!--toggle button end-->
+        <!--notification menu start -->
+        <div class="menu-right">
+            <ul class="notification-menu">
+              
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge">{{ $contact_enquiries_count or '0' }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-head pull-right">
+                        <h5 class="title">You have {{ $contact_enquiries_count or '0' }} Enquiries </h5>
+                        <ul class="dropdown-list normal-list">
+                        @if(isset($contact_enquiries) && $contact_enquiries != '' )   
+                            @if( $contact_enquiries_count >0 )   
+                                @foreach( $contact_enquiries as $enquiry )
+                                    <li class="new">
+                                        <a href="{{ url('/') }}/admin/contact_enquiry/reply/{{ base64_encode($enquiry['id']) }}">
+                                            <span class="desc">
+                                              <span class="name">{{ $enquiry['first_name'] or '' }} {{ $enquiry['last_name'] or '' }} <span class="badge badge-success"><?php if($enquiry['status'] == 0){
+                                                                        echo "Not replied";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        echo "replied";
+                                                                    }
+                                              ?></span></span>
+                                              <span class="msg">{{ $enquiry['message'] or '' }}</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <p class="text-info" style="text-align: center;margin-top: 15px">No New Enquiries</p>
+                            @endif
+                        @endif
+                            <li class="new"><a href="{{ url('/') }}/admin/contact_enquiry">See All Enquiries</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="badge">{{ $notification_count or '0' }}</span>
+                    </a>
+                        <div class="dropdown-menu dropdown-menu-head pull-right">
+                            <h5 class="title">Notifications</h5>
+                            <ul class="dropdown-list normal-list">
+                        @if(isset($notifications) && $notifications!='' )
+                            @if( $notification_count >0 )    
+                                @foreach( $notification as $key => $value )
+                                <li class="new">
+                                    <a href="{{ url('/') }}/admin/notification">
+                                        <span class="notification-image-section">
+                                            @if(isset($value['get_user_details']['profile_image']) && !empty($value['get_user_details']['profile_image']) && File::exists($user_profile_image_base_path.$value['get_user_details']['profile_image']))
+                                                <img style="width: 30px;height: 30px;border-radius: 15px;    " src="{{ $user_profile_image_public_path.$value['get_user_details']['profile_image'] }}">
+                                            @else
+                                                <img style="width: 30px;height: 30px;border-radius: 15px;" src="{{url('/')}}/uploads/default/no-img-user-profile.jpg" alt="" />
+                                            @endif
+                                        </span>
+                                        <span class="notification-name">{{ $value['title'] or '' }}</span>
+                                    </a>
+                                </li>
+                                @endforeach
+                            @else
+                                <p class="text-info" style="text-align: center;margin-top: 15px">No New Notifications</p>
+                            @endif
+                        @endif
+                                <li class="new"><a href="{{ url('/') }}/admin/notification">See All Notifications</a></li>
+                            </ul>
+                        </div>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                    @if(isset($shared_admin_details) && !empty($shared_admin_details['profile_image']) && File::exists($profile_image_base_img_path.$shared_admin_details['profile_image']))
+                        <img src="{{$profile_image_public_img_path.$shared_admin_details['profile_image']}}" alt="" />
+                    @else
+                        <img src="{{url('/')}}/uploads/default/no-img-user-profile.jpg" alt="" />
+                    @endif
+                        {{$shared_admin_details['first_name'] or 'NA'}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="{{url('/')}}/admin/account_setting"><i class="icon-user"></i>  Profile</a></li>
+                        <li><a href="{{url('/')}}/admin/password/change"><i class="icon-settings"></i>  Change Password</a></li>
+                    @if( is_user_logged_in('admin') )
+                        <li><a href="{{url('/')}}/admin/logout"><i class="icon-logout"></i> Log Out</a></li>
+                    @else
+                        <li><a href="{{url('/')}}/admin/sign_in"><i class="icon-login"></i> Sign In</a></li>
+                    @endif    
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!--notification menu end -->
+    </div>
+<!-- header section end-->

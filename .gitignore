@@ -1,0 +1,13 @@
+Homestead.json
+Homestead.yaml
+.env
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/logs/*
+storage/logs/*
+vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+storage/framework/logs/*
+uploads/*
+
+

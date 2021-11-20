@@ -1,0 +1,96 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used during authentication for various
+    | messages that we need to display to the user. You are free to modify
+    | these language lines according to your application's requirements.
+    |
+    */
+    'refresh'                                        => 'रीफ्रेश',
+    'add'                                            => 'जोडा',
+    'deactivate'                                     => 'निष्क्रिय करा',
+    'activate'                                       => 'सक्रिय करा',
+    'delete'                                         => 'हटवा',
+    'submit'                                         => 'प्रस्तुत करणे',
+    'back'                                           => 'मागे',
+    'create'                                        => 'तयार करा',
+    'status'                                         => 'स्थिती',
+    'action'                                         => 'कृती',
+    'inactive'                                       => 'निष्क्रिय',
+    'active'                                         => 'सक्रिय',
+    'view'                                           => 'पहा',
+    'edit'                                           => 'संपादन करा',
+    'manage'                                         => 'व्यवस्थापित करा',
+    'update'                                         => 'अद्यतनित करा',
+    'dashboard'                                         => 'डॅशबोर्ड',
+    'create'                                             => 'तयार करा',
+    'updated successfully'                                =>'यशस्वीरित्या अद्यतनित केले',
+    'error while updating '                               =>'अद्यतनित करताना त्रुटी',
+    'created successfully'                                =>'यशस्वीरित्या तयार केले',
+    'error while creating'                                =>'तयार करताना त्रुटी',
+    'Oops..'                                              =>'अरेरे..',
+    'Please select the record to perform this Action'     =>'कृपया ही क्रिया करण्यासाठी रेकॉर्ड निवडा',
+    'Do you really want to delete selected record(s)'     =>'आपण खरोखर निवडलेल्या रेकॉर्ड (डी) हटवू इच्छिता',
+    'Do you really want to inactive selected record(s)'   =>'आपणास खरोखर निवडलेले रेकॉर्ड (ऑ) निष्क्रिय करायचे आहेत का',
+     'Do you really want to activate selected record(s)'   =>'आपणास खरोखर निवडलेले रेकॉर्ड सक्रिय करायचे आहेत का',
+     'Are you sure'                                        =>'तुला खात्री आहे',
+     'warning'                                             =>'चेतावणी',
+     'approve'                                              =>'मंजूर',
+     'To Perform Multi Actions'                             =>'एकाधिक क्रिया करण्यासाठी',
+     'Please Select'                                        =>'कृपया निवडा',
+     'error'                                                =>'त्रुटी',
+     'Problem Occurred, While Doing Multi Action'           =>'मल्टी-इनिंगमध्ये समस्या होती',
+     ' Deleted Successfully'                                =>'यशस्वीरित्या हटविला',
+     'Activated Successfully'                               =>'यशस्वीरित्या सक्रिय केले',
+     'inactivated Successfully'                             =>'यशस्वीरित्या निष्क्रिय केले',
+     'send Successfully'                                    =>'यशस्वीरित्या पाठवा',
+     'Approved Successfully'                                =>'यशस्वीरित्या मंजूर',
+     'Unapproved Successfully'                              =>'यशस्वीरित्या अस्वीकृत',
+     'Verified Successfully'                                =>'यशस्वीरित्या सत्यापित',
+     'Processed Successfully'                               =>'यशस्वीरित्या प्रक्रिया केली',
+     'Full Name'                                            =>'पूर्ण नाव',
+     'Email'                                                 =>'ईमेल',
+     'Contact'                                               =>'संपर्क',
+     'Role'                                                 =>'भूमिका',
+     'First Name'                                            =>'पहिले नाव',
+    'Last Name'                                            =>'आडनाव',
+    'Select Role'                                          =>'भूमिका निवडा',
+    'Contact Number'                                       =>'संपर्क क्रमांक',
+    'Password'                                             =>'संकेतशब्द',
+    'Confirm Password'                                     =>'पासवर्डची पुष्टी करा',
+    'Address'                                              =>'पत्ता',
+    'Edit Team Member'                                    =>'कार्यसंघ सदस्य संपादित करा',
+    'Add Team Member'                                     =>'कार्यसंघ सदस्य जोडा',
+    'Mobile No'                                           =>'मोबाईल क्रमांक',
+    'Myteam Details'                                     =>'माझी कार्यसंघ तपशील',
+    'Oops! Something wents wrong.'                        =>'अरेरे! काहीतरी चुकले.',
+    'Please Contact Admin.'                               =>'कृपया अ‍ॅडमिनशी संपर्क साधा.',
+    'Email Allready Verified, Please Contact Admin'        =>'ईमेल ऑलरेडी सत्यापित, कृपया प्रशासकाशी संपर्क साधा',
+     'Error while updating Privilages.'                                              =>'विशेषाधिकार अद्यतनित करताना त्रुटी.',
+      'Privilages updated successfully'                                              =>'विशेषाधिकार यशस्वीरित्या अद्यतनित केले',
+      'Error Occcured While Verification, Please Contact Admin'                      =>'पडताळणी करताना त्रुटी आली, कृपया प्रशासकाशी संपर्क साधा',
+      'Account Verified. Error While Sending Mail. Please Contact Admin'             =>'खाते सत्यापित मेल पाठविताना त्रुटी. कृपया अ‍ॅडमिनशी संपर्क साधा',
+      'Check Your mail For Login Creditionals.'                                      =>'लॉगिन क्रेडेन्शियल्ससाठी आपले मेल तपासा.',
+      'Please Contact Admin.'                                                        =>'कृपया अ‍ॅडमिनशी संपर्क साधा.',
+      'Invalid File type, While creating'                                            =>'अवैध फाइल प्रकार, तयार करताना',
+      'MAil Fail'                                                                    =>'मेल अयशस्वी',
+      'My Team'                                                                      =>'माझी टीम',
+      'Module Name'                                                  =>'मॉड्यूल नाव',
+      'Module View'                                                  =>'मॉड्यूल व्ह्यू',
+      'List/View'                                                    =>'यादी / दृश्य',
+      'Create/Add'                                                   =>'तयार / जोडा',
+      'Edit/Update'                                                  =>'संपादित / अद्यतनित करा',
+      'Delete/Remove'                                                =>'हटवा / काढा',
+      'Active/Inactive'                                              =>'सक्रिय / निष्क्रिय',
+      'Permissions'                                                  =>'परवानग्या',
+       'Edit Permissions'                                                  =>'परवानग्या संपादित करा',
+
+ 
+   
+];
