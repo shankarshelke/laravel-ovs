@@ -1,7 +1,11 @@
-
+</div>
     <footer>
         <?php echo date("Y"); ?> &copy; AdminPanel
     </footer>
+<!-- End Containerbar -->
+<script>
+    var base_url = '<?= url('/');?>';
+</script>
 
 
 <script src="{{url('/')}}/assets/admin_assets/js/iCheck/jquery.icheck.js"></script>
@@ -19,6 +23,9 @@
 <script src="{{url('/')}}/assets/admin_assets/js/jquery.nicescroll.js"></script>
 <script src="{{url('/')}}/assets/admin_assets/js/scripts.js"></script>
 <script src="{{url('/')}}/assets/admin_assets/js/custom_scripts.js"></script>
+
+<!-- Custom Js -->
+<script src="<?= url('/') . '/assets/admin_assets/custom/js/sd-admin.js';?>"></script>
 
 <!--dynamic table-->
 <script type="text/javascript" src="{{url('/')}}/assets/admin_assets/js/plugins/tables/datatables/datatables.min.js"></script>

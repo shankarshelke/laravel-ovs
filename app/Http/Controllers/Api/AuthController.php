@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Common\Services\Authservice;
 use App\Common\Services\Galleryservice;
 use App\Common\Services\Voterservice;
+use App\Models\ReligionModel;
+use App\Models\CasteModel;
+use App\Models\OccupationModel;
+use App\Models\WardsModel;
+use App\Models\BoothModel;
+use App\Models\ListModel;
 use Session;
 
 
@@ -18,6 +24,12 @@ class AuthController extends Controller
 		// dd('in controller');
 		$this->Authservice    =  new Authservice();
 		$this->Voterservice   =  new Voterservice();
+		$this->ReligionModel   =  new ReligionModel();
+		$this->CasteModel   =  new CasteModel();
+		$this->OccupationModel   =  new OccupationModel();
+		$this->WardsModel   =  new WardsModel();
+		$this->BoothModel   =  new BoothModel();
+		$this->ListModel   =  new ListModel();
 		//$this->Galleryservice =  new Galleryservice();
 	}
 
@@ -131,13 +143,14 @@ class AuthController extends Controller
 		return $this->build_response($arr_response['status'],$arr_response['msg'],$arr_response['data']);
 	}
 	public function edit(Request $request, $enc_id)
-	{//dd('hiii')
+	{
 		$arr_response = $this->Voterservice->edit($request,$enc_id);
 		return $this->build_response($arr_response['status'],$arr_response['msg'],$arr_response['data']);
 	}
 
-	public function view($enc_id)
+	public function view(Request $request)
 	{
+		$enc_id = $request->input('id', 0);
 		$arr_response = $this->Voterservice->view($enc_id);
 		return $this->build_response($arr_response['status'],$arr_response['msg'],$arr_response['data']);
 	}
@@ -155,6 +168,36 @@ class AuthController extends Controller
 	{
 		$arr_response = $this->Authservice->logout($request);
 		return $this->build_response($arr_response['status'],$arr_response['msg'],$arr_response['data']);
+	}
+
+
+	/*********************************Common List***********************************************/
+
+	public function get_select_list(Request $request)
+	{
+		$arr_response['religion_list'] = $this->ReligionModel->get()->toArray();
+		$arr_response['caste_list'] = $this->CasteModel->get()->toArray();
+		$arr_response['occupation_list'] = $this->OccupationModel->get()->toArray();
+		$arr_response['ward_list'] = $this->WardsModel->where('status', '1')->get()->toArray();
+		return $this->build_response('success','Display list successfully',$arr_response);
+	}
+
+	public function get_booth_list(Request $request)
+	{
+		if($request->ward_id){
+			$this->BoothModel = $this->BoothModel->where('ward_id', $request->ward_id);
+		}
+		$arr_response = $this->BoothModel->get()->toArray();
+		return $this->build_response('success','Display list successfully',$arr_response);
+	}
+
+	public function get_boothlist_list(Request $request)
+	{
+		if($request->booth_id){
+			$this->ListModel = $this->ListModel->where('booth_id', $request->booth_id);
+		}
+		$arr_response = $this->ListModel->get()->toArray();
+		return $this->build_response('success','Display list successfully',$arr_response);
 	}
 
 }

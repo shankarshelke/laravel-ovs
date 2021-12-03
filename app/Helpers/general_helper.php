@@ -111,9 +111,9 @@
 	}
 
 	function translateText($text){
-		  $translation=TranslateText::translate('en','mr',$text);
-		  return $translation;
-	  }
+		$translation=TranslateText::translate('en','mr',$text);
+		return $translation;
+	}
 	
 
 ?>

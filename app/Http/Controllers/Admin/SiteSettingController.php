@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Common\CommonController;
 use App\Models\SiteSettingModel;
 use App\Models\CountryModel;
 use App\Common\Traits\MultiActionTrait;
@@ -13,10 +13,11 @@ use Session;
 use App\Common\Services\CommonDataService;
 
 
-class SiteSettingController extends Controller
+class SiteSettingController extends CommonController
 {
-    public function __construct()
-    {
+	public function __construct(Request $request)
+	{
+		parent::__construct($request);
     	$this->arr_view_data        = [];
 		$this->admin_url_path       = url(config('app.project.admin_panel_slug'));
 		$this->admin_panel_slug     = config('app.project.admin_panel_slug');
@@ -55,7 +56,8 @@ class SiteSettingController extends Controller
         $this->arr_view_data['admin_panel_slug']     = $this->admin_panel_slug;
         $this->arr_view_data['arr_site_settings']    = $arr_site_settings;  
         $this->arr_view_data['arr_site_settings_country_code']    = $arr_site_settings_country_code;
-        return view($this->module_view_folder.'.index',$this->arr_view_data);
+        $this->viewdata['view_html'] = view($this->module_view_folder.'.index',$this->arr_view_data)->render();
+        return $this->renderPage();
     }
 
     public function update(Request $request)

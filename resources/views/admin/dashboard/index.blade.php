@@ -1,5 +1,4 @@
-@extends('admin.layout.master')    
-@section('main_content')
+
 <!--body wrapper start-->
 <style>
 a {
@@ -267,4 +266,3 @@ a:hover {
       }
     </script>    
 <!--body wrapper end-->
-@endsection

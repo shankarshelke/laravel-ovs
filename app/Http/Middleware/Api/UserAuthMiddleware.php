@@ -41,7 +41,7 @@ class UserAuthMiddleware
                     if($user->status == '0')
                     {
                         $msg = 'Your account blocked by admin.';
-                        return $this->build_response('error',$msg,[],'json',401);
+                        return $this->build_response('error',$msg,[],'json',200);
                     }
                     else
                     {
@@ -52,12 +52,12 @@ class UserAuthMiddleware
                 else
                 {
                     $msg = 'Invalid user token';
-                    return $this->build_response('error',$msg,[],'json',401);
+                    return $this->build_response('error',$msg,[],'json',200);
                 }
             }
        }
        $msg = 'Token could not be parsed from the request.';
-       return $this->build_response('error',$msg,[],'json',401);
+       return $this->build_response('token_error',$msg,[],'json',200);
 
 
     }

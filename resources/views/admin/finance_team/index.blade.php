@@ -229,15 +229,16 @@ $(document).ready(function() {
         autoWidth: !1,
         bFilter: !1,*/
         var oTable = $('#myTable').DataTable({
-                processing: true,
-                serverSide: true,
-                searchDelay: 350,
         ajax: {
             url: "{{ $module_url_path}}/load_data",
             data: function(d) {
-                d['column_filter[full_name]']             = $("input[name='full_name']").val();
-                d['column_filter[ward]']                  = $( "input[name='ward']" ).val();
-                d['column_filter[status]']                = $( "#status option:selected" ).val();
+              //  d['column_filter[distributor_no]']        = $("input[name='distributor_no']").val()
+                d['column_filter[full_name]']             = $("input[name='full_name']").val()
+                //d['column_filter[village]']               = $( "input[name='village']" ).val()
+                //d['column_filter[city]']                  = $( "input[name='city']" ).val()
+                d['column_filter[ward]']                  = $( "input[name='ward']" ).val()
+                d['column_filter[status]']                = $( "#status option:selected" ).val()
+              
             }
         },
         columns: [
@@ -249,8 +250,19 @@ $(document).ready(function() {
 
                 },"orderable": false, "searchable":false
             },
+            //{data : 'distributor_no',"orderable":false,"searchable":true,name:'distributor_no'},
             {data : 'full_name',"orderable":false,"searchable":true,name:'full_name'},
             {data : 'ward',"orderable":false,"searchable":true,name:'ward'},
+            //{data : 'city',"orderable":false,"searchable":true,name:'city'},
+          //  {data : 'district',"orderable":false,"searchable":true,name:'district'},
+            
+
+         
+           
+           
+
+           /* {data : 'created_at',"orderable":false,"searchable":true,name:'created_at'},*/
+
             {
                 render : function(data, type, row, meta) 
                 {
@@ -271,7 +283,7 @@ $(document).ready(function() {
         "aoColumnDefs": [
             { "bSortable": false, "aTargets": [ 1 ] }
         ],
-        "aaSorting": [[2, 'desc']],
+        "aaSorting": [[2, 'asc']],
     });
 
     $('.dataTables_filter input,.dataTables_length select').addClass('form-control');

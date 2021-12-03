@@ -1,5 +1,3 @@
-@extends('admin.layout.master')    
-@section('main_content')
 <!--body wrapper start-->
 <style>
 	.error{color: red;}
@@ -342,7 +340,6 @@
 	}
 
 </script>
-@endsection
 
 
 

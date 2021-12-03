@@ -37,17 +37,11 @@
 	
 	<link href="{{url('/')}}/assets/admin_assets/css/datepicker-custom.css" rel="stylesheet">
 
-	<script src="{{url('/')}}/assets/admin_assets/js/select2.min.js" type='text/javascript'></script>
+	<script src='{{url('/')}}/assets/admin_assets/js/select2.min.js' type='text/javascript'></script>
 
 
 	<!-- CSS -->
-	<link href="{{url('/')}}/assets/admin_assets/css/select2.min.css" rel='stylesheet' type='text/css'>
-
-	<style>
-		.cursor-pointer{
-			cursor: pointer;
-		}
-	</style>
+	<link href='{{url('/')}}/assets/admin_assets/css/select2.min.css' rel='stylesheet' type='text/css'>
 	
 
 </head>
@@ -65,7 +59,11 @@
 
 			@include('admin.layout._header')
 
-			@yield('main_content')
+			<div class="view-html" id="view-html">
+				<?php if(isset($view_html)){ echo $view_html; } else {?>
+					@yield('main_content')
+				<?php } ?>
+			</div>
 
 			<!-- Footer -->
 			@include('admin.layout._footer')

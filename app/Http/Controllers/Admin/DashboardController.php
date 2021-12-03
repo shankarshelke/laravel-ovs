@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Common\CommonController;
 use DB;
 use Carbon;
 use App\Models\SiteSettingModel;
@@ -14,10 +14,11 @@ use App\Models\VoterMoneyDistributionModel;
 use App\Models\MoneyDistributionModel;
 
 
-class DashboardController extends Controller
+class DashboardController extends CommonController
 {
-	public function __construct()
+	public function __construct(Request $request)
 	{
+		parent::__construct($request);
 		$this->arr_view_data                    = [];
 		$this->module_title                     = "Dashboard";
 		$this->module_view_folder               = "admin.dashboard";		
@@ -183,7 +184,12 @@ class DashboardController extends Controller
         $this->arr_view_data['total_user']                          = $total_user;
         $this->arr_view_data['not_available']                        = $not_available;        
 		//dd($this->arr_view_data);
-		return view($this->module_view_folder.'.index',$this->arr_view_data);
+		// return view($this->module_view_folder.'.index',$this->arr_view_data);
+        $this->viewdata['view_html'] = view($this->module_view_folder.'.index',$this->arr_view_data)->render();
+		// echo $this->viewdata['view_html'];
+		// $this->getJsHtml();
+		// $this->getCssHtml();
+		return $this->renderPage();
 	}
 
 	public function sms_trial(Request $request)

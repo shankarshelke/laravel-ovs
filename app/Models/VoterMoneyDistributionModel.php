@@ -61,4 +61,8 @@ class VoterMoneyDistributionModel extends Model  implements AuthenticatableContr
     {
        return $this->hasOne('App\Models\CountryModel', 'id', 'country_id');
     }
+    public function get_distribution_amount()
+    {
+        return $this->hasMany('App\Models\MoneyDistributionModel','subadmin_id','subadmin_id');
+    }
 }

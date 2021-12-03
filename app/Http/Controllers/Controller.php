@@ -39,22 +39,16 @@ class Controller extends BaseController
     public function build_response( $status = 'success',
                                     $message = "",
                                     $arr_data = [],
+                                    $arr_result = [],
                                     $response_format = 'json',
                                     $response_code = 200)
     {
-        $arr_result=[];
 
         if($response_format == 'json')
         {
-            $arr_result = [
-                'status' => $status,
-                'msg' => $message
-            ];
-            
-            if(count($arr_data)>0)
-            {
-                $arr_result['response_data'] = $arr_data;
-            }
+            $arr_result['status'] = $status;
+            $arr_result['msg'] = $message;
+            $arr_result['response_data'] = $arr_data;
             return response()->json($arr_result,$response_code,[],JSON_UNESCAPED_UNICODE);    
         }   
     }

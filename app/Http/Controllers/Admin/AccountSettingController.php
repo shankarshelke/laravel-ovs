@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Common\CommonController;
 use App\Models\WebAdmin;
 use App\Common\Traits\MultiActionTrait;
 
@@ -12,10 +12,11 @@ use Validator;
 use Session;
 use Hash;
 
-class AccountSettingController extends Controller
+class AccountSettingController extends CommonController
 {
-	function __construct(WebAdmin $web_admin_model)
-    {
+	public function __construct(Request $request)
+	{
+		parent::__construct($request);
         $this->module_title                  = "Account Setting";
         $this->module_url_path               = url('/admin/account_setting');
         $this->module_view_folder            = "admin.account_setting";
@@ -54,7 +55,8 @@ class AccountSettingController extends Controller
         $this->arr_view_data['arr_admin_details']    = $arr_admin_details;
         $this->arr_view_data['admin_panel_slug']     = $this->admin_panel_slug;
 
-        return view($this->module_view_folder.'.index',$this->arr_view_data);
+        $this->viewdata['view_html'] = view($this->module_view_folder.'.index',$this->arr_view_data)->render();
+        return $this->renderPage();
     }
 
     public function update(Request $request)

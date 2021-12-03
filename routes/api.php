@@ -23,6 +23,15 @@ Route::group(['prefix'=>''], function()
 	Route::get('/get_country',					['as'	=> $module_slug.'get_country',
 												'uses'	=> $module_controller.'get_country']);
 
+	Route::any('/get_select_list',				['as'	=> $module_slug.'get_select_list',
+												'uses'	=> $module_controller.'get_select_list']);
+
+	Route::any('/get_booth_list',				['as'	=> $module_slug.'get_booth_list',
+												'uses'	=> $module_controller.'get_booth_list']);
+
+	Route::any('/get_boothlist_list',			['as'	=> $module_slug.'get_boothlist_list',
+												'uses'	=> $module_controller.'get_boothlist_list']);
+
 
 	Route::group(['prefix'=>'','middleware'=>'user_auth_check'], function()use($module_slug,$module_controller)
 	{	
@@ -47,7 +56,7 @@ Route::group(['prefix'=>''], function()
 		Route::any('/transfer_money_voter',     	['as'	=> $module_slug.'transfer_money_voter',
 													'uses'	=> $module_controller.'transfer_money_voter']);
 
-		Route::get('/view_voter_money_detail/{id}', ['as'	=> $module_slug.'view_voter_money_detail',
+		Route::any('/view_voter_money_detail/{id}', ['as'	=> $module_slug.'view_voter_money_detail',
 													'uses'	=> $module_controller.'view_voter_money_detail']);
 
 		Route::any('/votermoney_listing', 		 	['as'	=> $module_slug.'votermoney_listing',
@@ -61,9 +70,9 @@ Route::group(['prefix'=>''], function()
 													'uses'	=> $module_controller.'voter_listing']);
 		
 		
-		Route::post('/edit/{id}', 		 			['as'	=> $module_slug.'edit',
+		Route::post('/edit_voter/{id}', 		 	['as'	=> $module_slug.'edit',
 													'uses'	=> $module_controller.'edit']);
-		Route::get('/view/{id}', 		 			['as'	=> $module_slug.'view',
+		Route::any('/view', 		 			['as'	=> $module_slug.'view',
 													'uses'	=> $module_controller.'view']);
 		Route::get('/delete/{id}', 		 			['as'	=> $module_slug.'delete',
 													'uses'	=> $module_controller.'delete']);
@@ -90,6 +99,36 @@ Route::group(['prefix'=>''], function()
 													            'uses'	=> $module_controller.'subadmin_distributed_money_to_voter']);
 */
 
+
+	Route::group(['prefix' => '/finance_team'], function(){
+		$module_slug = 'finance_team';
+		$module_controller = 'Api\FinanceTeamController@';
+		Route::post('/finance_team_listing', 		['as'	=> $module_slug.'finance_team_listing',
+													'uses'	=> $module_controller.'finance_team_listing']);
+		Route::post('/add_money', 		 			['as'	=> $module_slug.'add_money',
+													'uses'	=> $module_controller.'add_money']);
+		Route::post('/create', 		 				['as'	=> $module_slug.'create',
+													'uses'	=> $module_controller.'create']);
+		Route::get('/view/{id}', 		 			['as'	=> $module_slug.'view',
+													'uses'	=> $module_controller.'view']);
+		Route::get('/delete/{id}', 		 			['as'	=> $module_slug.'delete',
+													'uses'	=> $module_controller.'delete']);
+	});
+
+	Route::group(['prefix' => '/wards'], function(){
+		$module_slug = 'wards';
+		$module_controller = 'Api\WardController@';
+		Route::post('/ward_listing', 		['as'	=> $module_slug.'ward_listing',
+											'uses'	=> $module_controller.'ward_listing']);
+	});
+	Route::group(['prefix' => '/voter_money_distribution'], function(){
+		$module_slug = 'voter_money_distribution';
+		$module_controller = 'Api\VoterMoneyController@';
+		Route::post('/transfer_money_voter', 		['as'	=> $module_slug.'transfer_money_voter',
+											'uses'	=> $module_controller.'transfer_money_voter']);
+		Route::post('/transfer_money_voter_list', 		['as'	=> $module_slug.'transfer_money_voter_list',
+											'uses'	=> $module_controller.'transfer_money_voter_list']);
+	});
 
 /*
 		$module_controller = 'Api\VoterController@';

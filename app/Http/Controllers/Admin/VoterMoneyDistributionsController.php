@@ -64,15 +64,16 @@ class VoterMoneyDistributionsController extends Controller
         }
         $obj_admin         = $this->WebAdmin->where('id','=',session('subadmin_id'))->first();
         // dd( $obj_admin);
-        if($obj_admin->admin_type=='SUBADMIN')
-        {//dd($obj_admin);
-            $obj_voter_team = $this->UsersModel->where('role_status','1') ->get();
+        // if($obj_admin->admin_type=='SUBADMIN')
+        // {
+        //     $obj_voter_team = $this->UsersModel->where('role_status','1')->get();
                                            
-        }
-        else
-        {
-          $obj_voter_team = $this->UsersModel->where('role_status','1')->get()  ;
-        }
+        // }
+        // else
+        // {
+        //   $obj_voter_team = $this->UsersModel->where('role_status','1')->get()  ;
+        // }
+        $obj_voter_team = $this->UsersModel->get()  ;
 
 
         $obj_admin  = $this->WebAdmin->where('id','=',session('subadmin_id'))->first();
@@ -406,8 +407,12 @@ class VoterMoneyDistributionsController extends Controller
 
         public function store(Request $request)
         { 
-
-           //dd($request->all());
+            $obj_user =$this->BaseModel->with('get_admin_details')->where('user_id',$request->input('user_id',null))->first();
+            if($obj_user) {
+                Session::flash('error', 'Already money distributed by '.$obj_user->get_admin_details->first_name. ' ' .$obj_user->get_admin_details->last_name);
+                return redirect($this->module_url_path);
+            }
+            
             $arr_rules      = $arr_data = array();
             $arr_rules['user_id']               ="required";
             $arr_rules['amount']                ="required";

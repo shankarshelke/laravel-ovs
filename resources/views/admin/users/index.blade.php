@@ -1,5 +1,4 @@
-@extends('admin.layout.master')    
-@section('main_content')
+
 <style type="text/css">
     .form-inline .form-control {display: block;}
 </style>
@@ -16,7 +15,7 @@
                         <a href="#myModal" class="btn btn-default btn-rounded show-tooltip" title="Notification" onclick="check_empty()">Notification</a> -->
                         {{--  <a href="#myModal" class="btn btn-default btn-rounded show-tooltip" title="Notification" onclick="check_empty()">Send Msg</a> --}}
                         @if(get_admin_access('voters','create'))
-                        <a href="{{ url($module_url_path) }}/create">Add</a>
+                        <a class="loadPage" data-url="{{ url($module_url_path) }}/create">Add</a>
                         @endif
                         @if(get_admin_access('voters','create'))
                         <a href="{{ url($module_url_path) }}/import">Import</a>
@@ -383,4 +382,3 @@ $(document).ready(function() {
 });
    
 </script>   
-@endsection

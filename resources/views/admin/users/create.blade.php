@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+
 <style type="text/css">
     #map {
   height: 300px;
@@ -19,7 +19,7 @@ html, body {
     section.panel{-webkit-box-shadow: none;box-shadow: none;}
 </style>
     
-@section('main_content')
+
 <?php 
 $temp_id = Session::get('temp_id');
 
@@ -53,25 +53,15 @@ $temp_id = Session::get('temp_id');
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">FullName<i class="red" style="color:red;">*</i></label>
+                                    <label class="control-label">FullName<i class="red">*</i></label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="ti-user"></i></span>
                                         <input type="text" id="fullname"  name="fullname" value="{{old('fullname')}}" class="form-control ">
-                                    </div>
-                                    <span class="error_first_name" style="color: red;position: absolute;">{{ $errors->first('fullname') }} </span>
-                                </div>
-                            </div>
-                            <!-- <div class="col-sm-12 col-md-12 col-lg-3">
-                                <div class="form-group">
-                                    <label class="control-label">First Name<i class="red">*</i></label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="ti-user"></i></span>
-                                        <input type="text" id="first_name"  name="first_name" value="{{old('first_name')}}"  {{-- data-rule-lettersonly=”true” --}} class="form-control ">
-                                        <span class="error" style="color: red;">{{ $errors->first('first_name') }} </span>
+                                        <span class="error_first_name" style="color: red;">{{ $errors->first('fullname') }} </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-3">
+<!--                             <div class="col-sm-12 col-md-12 col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Last Name<i class="red">*</i></label>
                                     <div class="input-group">
@@ -117,7 +107,7 @@ $temp_id = Session::get('temp_id');
                                     <label class="control-label">Date of Birth<!-- <i class="red">*</i> --></label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="ti-user"></i></span>
-                                        <input type="text" id="datepicker_one" value="{{old('date_of_birth')}}" name="date_of_birth" class="form-control cursor-pointer" placeholder="Date of Birth">
+                                        <input type="text" id="datepicker_one" readonly="" value="{{old('date_of_birth')}}" name="date_of_birth" class="form-control" placeholder="Date of Birth">
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +131,7 @@ $temp_id = Session::get('temp_id');
                             </div>                            
                             <div class="col-sm-12 col-md-12 col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">Gender<i class="red" style="color:red;">*</i></label>
+                                    <label class="control-label">Gender<i class="red">*</i></label>
                                     <div class="input-group">                                                                                
                                         <div class="radio-btn" style="float: left;margin-right: 30px">
                                             <input type="radio" id="s-option1" name="gender" class = "gender" value="male"@if(old('gender')) checked @endif >
@@ -167,7 +157,7 @@ $temp_id = Session::get('temp_id');
                                 <label class="control-label">Enter Address<i style="color:red;">*</i></label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="ti-user"></i></span>
-                                    <input type="text" id="address" name="address" value="{{old('address')}}"   class="form-control ">
+                                    <input type="text" id="address" readonly=""  name="address" value="{{old('address')}}"   class="form-control ">
                                     <span class="error" style="color: red;">{{ $errors->first('address') }} </span>
                                 </div>
                             </div>
@@ -182,7 +172,7 @@ $temp_id = Session::get('temp_id');
                                 </div>
                             </div>
                         </div> --}}
-                        <button type="button" class="btn btn-success icon icon-plus2" onclick="addMemberTemp();" id="add_new_item1">+</button>                        
+  <button type="button" class="btn btn-success icon icon-plus2" onclick="addMemberTemp();" id="add_new_item1">+</button>                        
                     </div>
                 </div>                    
 
@@ -197,7 +187,6 @@ $temp_id = Session::get('temp_id');
                     <div class="form-group">
                         <label class="control-label">Pick Voter Location<i style="color:red;">*</i></label>
                         <div class="input-group">
-                            <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box"/> -->
                             <div id="map"></div>
                             <input type="hidden" name="latitude" id="latitude"  value=""/>
                             <input type="hidden" name="longitude"id="longitude"  value=""/>
@@ -360,7 +349,7 @@ $temp_id = Session::get('temp_id');
 {{-- <script src="{{url('/')}}/assets/admin_assets/js/pickers-init.js"></script>
  --}}
 <script async defer
-src="https://maps.googleapis.com/maps/api/js?key={{ config('app.project.google_map_api_key') }}&callback=initMap&libraries=places">
+src="https://maps.googleapis.com/maps/api/js?key={{ config('app.project.google_map_api_key') }}&callback=initMap">
 </script>
 <script>
 // function validate(){
@@ -389,18 +378,15 @@ $(document).ready(function(){
 
     function addMemberTemp()
     {
-        var regName = /^[a-zA-Z ]+$/;
-        var name = $.trim(document.getElementById('fullname').value);
-        var name_array = name.split(' ');
-        console.log(name_array.length);
-        if(regName.test(name) || (name_array.length == 2 || name_array.length == 3)){
-            $('.error_first_name').html('');
-        }else{
-            // alert('Please enter your full name (first & last name).');
-            ($('.error_first_name').html('') != '') ? $('.error_first_name').html('Please enter your full name (first & last name).') : '';
-            document.getElementById('fullname').focus();
-            return false;
-        }
+
+    var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    var name = document.getElementById('fullname').value;
+    
+    if(!regName.test(name)){
+        alert('Please enter your full name (first & last name).');
+        document.getElementById('fullname').focus();
+        return false;
+    }     
         //alert("df");
         // if($("#first_name").val() ==''){
         //     $( "#first_name" ).focus();
@@ -412,7 +398,7 @@ $(document).ready(function(){
         //      alert("Enter Last Name.!")
         //      return false;
         // } 
-        if($("#contact").val() != ''){
+        if($("#contact").val() !=''){
             var contact = $('#contact').val();
             var regmm='^([0|+[0-9]{1,5})?([7-9][0-9]{9})$';
             var regmob = new RegExp(regmm);
@@ -423,7 +409,6 @@ $(document).ready(function(){
             }            
         } 
         if (($("input[name*='gender']:checked").length)<=0) {
-            ($('.error_first_name').html('') != '') ? $('.error_first_name').html('Select Gender.!') : '';
             alert("Select Gender.!");
             return false;
         }                      
@@ -442,30 +427,29 @@ $(document).ready(function(){
         var longitude = $('#longitude').val();
         var temp_id = "{{$temp_id}}";
                                              
-        $.ajax({
-            type : 'post',
-            url : "{{$module_url_path}}/add_member",
-            data:{ "_token": "{{ csrf_token() }}",'voter_id':voter_id,'fullname':fullname,'father_full_name':father_full_name,'email':email,'contact':contact,'date_of_birth':date_of_birth,'gender':gender,'occupation':occupation,'other_address':other_address,'address':address,'latitude':latitude,'longitude':longitude,'temp_id':temp_id},
-            success:function(data){ 
-            
-                if (data == '0') {
-                        swal("Oopss!", "You clicked the button!", "error");
-                } 
-                else {
-                    loadMember(<?= $temp_id; ?>); 
-                    swal("Added Successfully!", "", "success");
-                    $("#voter_id").val("");
-                    $("#fullname").val("");
-                    $("#first_name").val("");
-                    $("#last_name").val("");
-                    $("#father_full_name").val("");
-                    $('#email').val("")
-                    $('#contact').val(""); 
-                    $("#datepicker_one").val("");
-                    $('#occupation').val("")
-                    $('#other_address').val("");                                       
+                $.ajax({
+                        type : 'post',
+                        url : "{{$module_url_path}}/add_member",
+                        data:{ "_token": "{{ csrf_token() }}",'voter_id':voter_id,'fullname':fullname,'father_full_name':father_full_name,'email':email,'contact':contact,'date_of_birth':date_of_birth,'gender':gender,'occupation':occupation,'other_address':other_address,'address':address,'latitude':latitude,'longitude':longitude,'temp_id':temp_id},
+                        success:function(data){ 
+                        
+                         if (data == '0') {
+                            swal("Oopss!", "You clicked the button!", "error");
+                        } 
+                        else {
+                               loadMember(<?= $temp_id; ?>); 
+                               swal("Added Successfully!", "", "success");
+                                $("#voter_id").val("");
+                                $("#first_name").val("");
+                                $("#last_name").val("");
+                                $("#father_full_name").val("");
+                                $('#email').val("")
+                                $('#contact').val(""); 
+                                $("#datepicker_one").val("");
+                                $('#occupation').val("")
+                                $('#other_address').val("");                                       
+                        }
                 }
-            }
         });
     }
 </script>
@@ -501,20 +485,20 @@ $(document).ready(function(){
         jQuery.validator.addMethod("lettersonly", function(value, element) {
         return this.optional(element) || /^[a-z]+$/i.test(value);}, "Letters only please");
 
-        $('#frm_create_page').validate({
-            rules: {
-                // gender: {
-                //   required: true
-                // },
-                    voting_surety: {
-                    required: true
-                },
-                    face_color: {
-                    required: true
+    $('#frm_create_page').validate({
+                                      rules: {
+                                        // gender: {
+                                        //   required: true
+                                        // },
+                                         voting_surety: {
+                                          required: true
+                                        },
+                                         face_color: {
+                                          required: true
 
-                }
-            }
-        })
+                                      }
+                                    }
+                        })
 
     });
 
@@ -523,7 +507,7 @@ $(document).ready(function(){
 <Script>
 var map, infoWindow;
 var nashik   = { lat: 19.9975 ,lng: 73.7898 };
-function initChange() {
+function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: nashik,
     zoom: 15
@@ -603,111 +587,7 @@ function initChange() {
                     });
                 });
   infoWindow = new google.maps.InfoWindow;
-    return map(latitude,longitude);
-}
-
-
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: nashik,
-      zoom: 13,
-    });
-    var input = document.getElementById('address');
-    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.bindTo('bounds', map);
-
-    var infowindow = new google.maps.InfoWindow();
-    var marker = new google.maps.Marker({
-        map: map,
-        anchorPoint: new google.maps.Point(0, -29),
-    });
-
-    autocomplete.addListener('place_changed', function() {
-        // infowindow.close();
-        // marker.setVisible(false);
-        var place = autocomplete.getPlace();
-        // if (!place.geometry) {
-        //     window.alert("Autocomplete's returned place contains no geometry");
-        //     return;
-        // }
-  
-        // // If the place has a geometry, then present it on a map.
-        // if (place.geometry.viewport) {
-        //     map.fitBounds(place.geometry.viewport);
-        // } else {
-        //     map.setCenter(place.geometry.location);
-        //     map.setZoom(17);
-        // }
-        // marker.setIcon(({
-        //     url: place.icon,
-        //     size: new google.maps.Size(71, 71),
-        //     origin: new google.maps.Point(0, 0),
-        //     anchor: new google.maps.Point(17, 34),
-        //     scaledSize: new google.maps.Size(35, 35)
-        // }));
-        // marker.setPosition(place.geometry.location);
-        // marker.setVisible(true);
-    
-        // var address = '';
-        // if (place.address_components) {
-        //     address = [
-        //       (place.address_components[0] && place.address_components[0].short_name || ''),
-        //       (place.address_components[1] && place.address_components[1].short_name || ''),
-        //       (place.address_components[2] && place.address_components[2].short_name || '')
-        //     ].join(' ');
-        // }
-    
-        // infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-        // infowindow.open(map, marker);
-      
-        
-        // for (var i = 0; i < address_components.length; i++)
-        // {
-        //     if(results[0].address_components[i].types[0] == 'administrative_area_level_1'){
-        //         $("#state").val(results[0].address_components[i].long_name);        //for state name
-        //     }
-
-        //     if(results[0].address_components[i].types[0] == 'administrative_area_level_2'){
-        //         $("#district1").val(results[0].address_components[i].long_name);         //for city name
-        //     }
-        //     // if(results[0].address_components[i].types[0] == 'locality'){
-        //     //     $("#village").val(results[0].address_components[i].long_name);//for city name
-        //     // }
-
-        //     if(results[0].address_components[i].types[0] == 'postal_code'){
-        //         $("#postal_code").val(results[0].address_components[i].long_name);         //for city name
-        //     }
-
-        //     if(results[0].address_components[i].types[0] == 'route'){
-        //         $("#street").val(results[0].address_components[i].long_name);         //for city name
-        //     }
-        //     if(results[0].address_components[i].types[0] == 'premise'){
-        //         $("#house_no").val(results[0].address_components[i].long_name);         //for city name
-        //     }
-
-        //     if($("#street").val()=='')
-        //         {$("#street").val('Unnamed Road');}
-        //         /*if(result.address_components[i].types[0] == 'administrative_area_level_1'){
-        //             $("#state").val(result.address_components[i].long_name);                //for state name
-        //         }
-        //         if(result.address_components[i].types[0] == 'locality'){
-        //             $("#city").val(result.address_components[i].long_name);                 //for city name
-        //         }
-        //         if(result.address_components[i].types[0] == 'postal_code'){
-        //             $("#postal_code").val(result.address_components[i].long_name);          //for city name
-        //         }*/
-
-        // }
-        // document.getElementById('location').innerHTML = place.formatted_address;
-        // document.getElementById('lat').innerHTML = place.geometry.location.lat();
-        // document.getElementById('lon').innerHTML = place.geometry.location.lng();
-
-        nashik   = { lat: place.geometry.location.lat() ,lng: place.geometry.location.lng() };
-
-        initChange();
-    });
+    //return map(latitude,longitude);
 }
 </Script>
 
@@ -873,12 +753,12 @@ function initMap() {
     }
   });
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
 <script type="text/javascript">
 google.load("elements", "1", {packages: "transliteration"});
-
+</script> 
+<script>
 function OnLoad() {                
     var options = {
         sourceLanguage:
@@ -918,6 +798,5 @@ google.setOnLoadCallback(OnLoad);
 </script> 
 
 
-@endsection
 
 

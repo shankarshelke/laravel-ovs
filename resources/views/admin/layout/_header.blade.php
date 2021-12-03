@@ -6,7 +6,7 @@
     .msg{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;display: block;margin-top: 3px;}
 </style>
     <div class="header-section">
-
+    {{csrf_field()}}
         <!--toggle button start-->
         <a class="toggle-btn menu-btn-section"><i class="icon-menu"></i></a>
         <!--toggle button end-->

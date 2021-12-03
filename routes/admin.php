@@ -44,12 +44,12 @@ Route::group(array('prefix' => $web_admin_path,'middleware'=>'auth_admin'), func
 	Route::get('logout', 				['as' => $route_slug.'logout', 'uses' => $module_controller.'logout']);
 	// dd('here');
 	$module_controller = "Admin\DashboardController@";
-	Route::get('/dashboard', 			  ['as' =>$route_slug.'index', 'uses' => $module_controller.'index' , 'middleware' => 'module_access_permission']);
+	Route::any('/dashboard', 			  ['as' =>$route_slug.'index', 'uses' => $module_controller.'index' , 'middleware' => 'module_access_permission']);
 
 
 	$module_controller = "Admin\SiteSettingController@";
 	
-	Route::get('site_setting',			  			['as' =>$route_slug.'site_setting', 'uses' => $module_controller.'index' ,'middleware' => 'module_access_permission']);
+	Route::any('site_setting',			  			['as' =>$route_slug.'site_setting', 'uses' => $module_controller.'index' ,'middleware' => 'module_access_permission']);
 	
 	Route::post('site_setting/update',	  			['as' =>$route_slug.'site_setting', 'uses' => $module_controller.'update','middleware' => 'submodule_access_permission']);
 
@@ -77,7 +77,7 @@ Route::group(array('prefix' => $web_admin_path,'middleware'=>'auth_admin'), func
 
 		$module_controller = "Admin\UsersController@";
 
-		Route::get('/',					['as' =>$route_slug.'index', 'uses' => $module_controller.'index', 'middleware' => 'module_access_permission']);
+		Route::any('/',					['as' =>$route_slug.'index', 'uses' => $module_controller.'index', 'middleware' => 'module_access_permission']);
 
 		Route::get('/send_sms',					['as' =>$route_slug.'send_sms', 'uses' => $module_controller.'send_sms', 'middleware' => 'module_access_permission']);
 		
@@ -88,7 +88,7 @@ Route::group(array('prefix' => $web_admin_path,'middleware'=>'auth_admin'), func
 
 		Route::get('/select_form',		['as' =>$route_slug.'select_form', 'uses' => $module_controller.'select_form']);
 
-		Route::get('/create',		['as' =>$route_slug.'create', 'uses' => $module_controller.'create', 'middleware' => 'submodule_access_permission']);;
+		Route::any('/create',		['as' =>$route_slug.'create', 'uses' => $module_controller.'create', 'middleware' => 'submodule_access_permission']);;
 
 		Route::get('/aadhar',		['as' =>$route_slug.'aadhar_create', 'uses' => $module_controller.'aadhar_create', 'middleware' => 'submodule_access_permission']);
 

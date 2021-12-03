@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Common\CommonController;
 
 use App\Models\WebAdmin;
 //use App\Models\MerchantModel;
@@ -12,7 +12,7 @@ use Validator;
 use Session;
 use Cookie;
 
-class AuthController extends Controller
+class AuthController extends CommonController
 {
     public function __construct(WebAdmin $web_admin_model)
     {
@@ -31,7 +31,7 @@ class AuthController extends Controller
         $this->arr_view_data['page_title']       = $this->module_title." Login";
         $this->arr_view_data['admin_panel_slug'] = $this->admin_panel_slug;
         $this->module_view_folder = "admin.auth";
-        return view($this->module_view_folder.'.login',$this->arr_view_data);	
+        return view($this->module_view_folder.'.login',$this->arr_view_data);
     }
 
     public function validate_login(Request $request)

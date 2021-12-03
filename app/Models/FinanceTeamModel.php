@@ -3,6 +3,7 @@
 namespace App\Models;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class FinanceTeamModel extends Model
 {
@@ -40,5 +41,14 @@ class FinanceTeamModel extends Model
     public function get_ward_details()
     {
         return $this->belongsTo('App\Models\WardsModel','ward','id');
+    }
+
+    public function get_distribution_amount()
+    {
+        return $this->hasMany('App\Models\MoneyDistributionModel','subadmin_id','subadmin_id');
+    }
+    public function get_voter_distribution_amount()
+    {
+        return $this->hasMany('App\Models\VoterMoneyDistributionModel','subadmin_id','subadmin_id');
     }
 }

@@ -1,0 +1,150 @@
+/* .loader {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background: black url(./../img/spinner.gif) center 100px no-repeat;
+    opacity: .5;
+} */
+
+.loader {
+    position: fixed !important;
+    z-index: 1040;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+#inner-notification {
+    min-width: 250px;
+    /* Set a default minimum width */
+    visibility: visible;
+    /* Hidden by default. Visible on click */
+    text-align: center;
+    /* Centered text */
+    border-radius: 2px;
+    /* Rounded borders */
+    position: fixed;
+    /* Sit on top of the screen */
+    z-index: 3000;
+    /* Add a z-index if needed */
+}
+
+/* .alert-success {
+    color: #156a4f;
+    background-color: #0df5a7;
+    border-color: #90e4c9;
+} */
+
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: #0071c1a8;
+}
+
+
+/* When you mouse over the container, fade in the overlay icon*/
+
+.gallary:hover .img-overlay,
+.gallary.active .img-overlay {
+    opacity: 1;
+}
+
+
+/* The icon inside the overlay is positioned in the middle vertically and horizontally */
+
+.icon {
+    color: white;
+    font-size: 50px;
+    position: absolute;
+    transform: translate(-50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+
+/* When you move the mouse over the icon, change color */
+
+.mdi-eye:hover {
+    color: #eee;
+}
+
+
+/* favicon img desplay properly */
+
+.app-brand a img {
+    max-width: 50px;
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+    margin-left: -10px;
+}
+
+
+/* favicon img desplay properly */
+
+.table-img {
+    height: 100px;
+    width: 100px;
+    vertical-align: middle;
+}
+
+
+/* custom css */
+
+.img-image {
+    height: 100px;
+    border: 2px solid #4c84ff;
+    border-radius: 5%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.heading-border-bottom {
+    border-bottom: 2px dashed #f68721!important;
+}
+
+.card-header-top {
+    background-color: #ffffff;
+    padding-top: 28px;
+    border-top: 1px solid #e5e9f2;
+}
+
+.modal {
+    z-index: 1070!important;
+}
+
+.overflow-x {
+    overflow-x: scroll!important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

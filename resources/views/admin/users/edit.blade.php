@@ -54,7 +54,7 @@ html, body {
                                     <label class="control-label">Fullname<i style="color:red;">*</i></label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="ti-user"></i></span>
-                                        <input type="text" id="fullname"  name="fullname"  data-rule-required="true"  class="form-control "value="{{ (($arr_data['full_name']) ? $arr_data['full_name'] : ($arr_data['first_name'] . ' ' . $arr_data['last_name'])) }}">
+                                        <input type="text" id="fullname"  name="fullname"  data-rule-required="true"  class="form-control "value="{{ $arr_data['first_name'] or 'NA' }}{{ $arr_data['last_name'] or 'NA' }}">
                                         <span class="error">{{ $errors->first('fullname') }} </span>
                                     </div>                                    
                                 </div>

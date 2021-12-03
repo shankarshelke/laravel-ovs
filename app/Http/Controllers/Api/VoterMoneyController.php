@@ -25,6 +25,11 @@ class VoterMoneyController extends Controller
 		$arr_response = $this->VoterMoneyService->transfer_money_voter($request);
 		return $this->build_response($arr_response['status'],$arr_response['msg'],$arr_response['data']);
 	}
+	public function transfer_money_voter_list(Request $request)
+	{
+		$arr_response = $this->VoterMoneyService->transfer_money_voter_list($request);
+		return $this->build_response($arr_response['status'],$arr_response['msg'],$arr_response['data']);
+	}
 
 	public function view_voter_money_detail(Request $request,$id)
 	{

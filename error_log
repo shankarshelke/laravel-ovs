@@ -1,0 +1,10 @@
+[13-Mar-2021 10:32:11 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:32:47 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:32:47 UTC] PHP Warning:  A non-numeric value encountered in /home/wingdemo/public_html/voting/ourdba.php on line 98
+[13-Mar-2021 10:32:50 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:33:02 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:33:02 UTC] PHP Warning:  A non-numeric value encountered in /home/wingdemo/public_html/voting/ourdba.php on line 98
+[13-Mar-2021 10:33:08 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:33:14 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:33:33 UTC] PHP Deprecated:  Function get_magic_quotes_gpc() is deprecated in /home/wingdemo/public_html/voting/ourdba.php on line 49
+[13-Mar-2021 10:33:33 UTC] PHP Warning:  A non-numeric value encountered in /home/wingdemo/public_html/voting/ourdba.php on line 98

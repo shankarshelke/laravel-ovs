@@ -17,6 +17,7 @@ use JWTAuth;
 use Hash;
 use Session;
 use Crypt;
+use DB;
 
 class VoterMoneyService
 {
@@ -43,8 +44,11 @@ class VoterMoneyService
 		$arr_rules      		= $arr_data = array();
 		$status         		= false;
     	$arr_rule['amount']   	= "required";
-    	//$arr_rule['d_date']   	= "required";
+    	$arr_rule['distribution_type']  = "required";
         $arr_rule['user_id']   	= "required";
+		if($request->distribution_type == '1'){
+        	$arr_rule['comment']   	= "required";
+		}
 
 			
 		$validator = Validator::make($request->all(), $arr_rule);
@@ -53,7 +57,7 @@ class VoterMoneyService
 		{
 			$arr_responce['status'] = 'error';
 			$arr_responce['msg']	= 'Please fill all the required field.';
-			$arr_responce['data']	= [];
+			$arr_responce['data']	= $validator->errors()->messages();
 			return $arr_responce;
 		}
 		// dd(session('subadmin_id'));
@@ -66,27 +70,69 @@ class VoterMoneyService
 			return $arr_responce;
 		}
 		$obj_accountant =$this->FinanceTeamModel->where('subadmin_id',session('subadmin_id'))->get();
-      //dd($obj_accountant);
         if ($obj_accountant)
         { 
             $arr_accountant = $obj_accountant->toArray();
-            // dd($arr_accountant[0]['village_id']);
-        }
+        
+			$arr_data['amount']			     = $request->input('amount', null);
+			$arr_data['d_date']              = date('Y-m-d');
+			$arr_data['distribution_type']   = $request->input('distribution_type', '0');
+			$arr_data['comment']   			 = $request->input('comment', null);
+			$arr_data['user_id']             = $request->input('user_id',null);
+			$arr_data['subadmin_id']         = session('subadmin_id');
 
-     //   $arr_data['village_id']          = $arr_accountant[0]['village_id'];
-		$arr_data['amount']			     = $request->input('amount', null);
-		$arr_data['d_date']              = date('Y-m-d');
-		$arr_data['user_id']             = $request->input('user_id',null);
-		$arr_data['subadmin_id']         = session('subadmin_id');
+			$status = $this->VoterMoneyDistributionModel->create($arr_data);
+			if($status)
+			{	
+				$user_id    			= $status->user_id;
+				$arr_responce['status'] = 'success';
+				$arr_responce['msg']	= 'Money Transfer successfully.';
+				$arr_responce['data']	= $status->toArray();
+				return $arr_responce;
+			}
+		}
 
-		//dd($arr_data);
-		$status = $this->VoterMoneyDistributionModel->create($arr_data);
-		if($status)
-		{	
-			$user_id    			= $status->user_id;
+		$arr_responce['status'] = 'error';
+		$arr_responce['msg']	= 'Oops,Something went wrong,please try again later.';
+		$arr_responce['data']	= [];
+		return $arr_responce;
+	}
+
+	public function transfer_money_voter_list($request)
+	{   
+		$arr_data = $arr_rule = array();
+
+		$validator = Validator::make($request->all(), $arr_rule);
+
+		if($validator->fails())
+		{
+			$arr_responce['status'] = 'error';
+			$arr_responce['msg']	= 'Please fill all the required field.';
+			$arr_responce['data']	= $validator->errors()->messages();
+			return $arr_responce;
+		}
+		if(session('subadmin_id') == 1)
+		{
+			$obj_data = $this->VoterMoneyDistributionModel;
+			$obj_distributed_amt = $this->MoneyDistributionModel->sum('amount');
+		}else{
+			$obj_data = $this->VoterMoneyDistributionModel->where('subadmin_id',session('subadmin_id'));
+			$obj_distributed_amt = $this->MoneyDistributionModel->where('subadmin_id',session('subadmin_id'))->sum('amount');
+		}
+
+		$obj_data = $obj_data->select('voter_money.*', 'users.full_name as voter_full_name', DB::raw("CONCAT(web_admin.first_name,' ',web_admin.last_name) as distributor_full_name"))
+                    ->leftJoin('web_admin','voter_money.subadmin_id','=','web_admin.id')
+                    ->leftJoin('users','voter_money.user_id','=','users.id')->get()->toArray();
+					
+        if ($obj_data)
+        { 
+			$total_amount 			= $obj_distributed_amt;
+			$total_distributed_amt 	= array_sum(array_column($obj_data, 'amount'));
+			$remening_amount 		= ($total_amount - $total_distributed_amt);
+			$arr_responce['data'] = ['total_amount' => number_format($total_amount, 2), 'total_distributed_amount' => number_format($total_distributed_amt,2), 'remening_amount' => number_format($remening_amount, 2), 'data' => $obj_data];
+			
 			$arr_responce['status'] = 'success';
 			$arr_responce['msg']	= 'Money Transfer successfully.';
-			$arr_responce['data']	= [];
 			return $arr_responce;
 		}
 
@@ -96,7 +142,7 @@ class VoterMoneyService
 		return $arr_responce;
 	}
 
-	public function view_voter_money_detail($request,$id)
+	public function view_voter_money_detail($request, $id)
 	{
 		$userdata = $this->VoterMoneyDistributionModel->where('id',$id)->with(['get_admin_details','get_user_details'])->first();
 		//dd($userdata->get_admin_details->toArray());

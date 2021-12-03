@@ -14,16 +14,6 @@
                 </header> --}}
                 <div class="panel-body" style="position: relative">
                     @include('admin.layout._operation_status')
-
-
-                    <div class="adv-table">
-                        <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline table-responsive" role="grid">
-                            <form name="frm_manage" id="frm_manage" method="POST" class="form-horizontal" action="{{url($module_url_path)}}/multi_action">
-                                    {{ csrf_field() }}
-                                <input type="hidden" name="multi_action" value="" />
-                                <table class="display table table-bordered dataTable" id="myTable" id="tbl_activitylog_listing">
-                                    <thead>
-                                    <!-- <tr>
                     <div class="table-action-buttons-top">
                         <a href="{{ url($module_url_path) }}" class="btn btn-default btn-rounded show-tooltip" title="Refresh" >Refresh</a>
                         {{-- @if(get_admin_access('voting_booth','create'))
@@ -39,7 +29,16 @@
                         @if(get_admin_access('voting_booth','delete'))
                         <a href="javascript:void(0)" class="btn btn-default btn-rounded show-tooltip" title="Delete Multiple" onclick="check_multi_action('frm_manage','delete')">Delete</a>
                         @endif
-                    </div></tr> -->
+                    </div>
+
+
+                    <div class="adv-table">
+                        <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline table-responsive" role="grid">
+                            <form name="frm_manage" id="frm_manage" method="POST" class="form-horizontal" action="{{url($module_url_path)}}/multi_action">
+                                    {{ csrf_field() }}
+                                <input type="hidden" name="multi_action" value="" />
+                                <table class="display table table-bordered dataTable" id="myTable" id="tbl_activitylog_listing">
+                                    <thead>
                                         <tr>
                                             <th style="width: 20px;">
                                               

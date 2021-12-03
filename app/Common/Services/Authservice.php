@@ -75,18 +75,21 @@ class Authservice
 			if($obj_user->admin_type == 'SUPERADMIN')
 			{
 				$arr_login_data['permission']   = "SUPERADMIN has All Permissions";
+				$arr_login_data['role']   		= $obj_user->role;
+				$arr_login_data['admin_type']   		= $obj_user->admin_type;
 			}
 			if ($obj_user->admin_type == 'SUBADMIN') 
 			{
-				$arr_login_data['permission']   =$obj_user->permissions;
-				$arr_login_data['role']   		=$obj_user->role;
+				$arr_login_data['permission']   = $obj_user->permissions;
+				$arr_login_data['role']   		= $obj_user->role;
+				$arr_login_data['admin_type']   		= $obj_user->admin_type;
 			} 
 			
 			$arr_login_data['tokan']	        = $token;
 
 			$arr_responce['status'] = 'success';
 			$arr_responce['msg']	= 'Congratulations! '.$arr_login_data['first_name'].' '.$arr_login_data['last_name'] .' You have logged in successfully.';
-			$arr_responce['data']	= $arr_login_data;
+			$arr_responce['data'][]	= $arr_login_data;
 			return $arr_responce;
 		}
 		else
@@ -109,7 +112,7 @@ class Authservice
 			$arr_responce['data']	= [];
 			return $arr_responce;
 		}
-*/
+		*/
 		$arr_rule = [];
 		$arr_responce = [];
         $arr_rule['email']   	= "required|email|unique:web_admin,email";
@@ -712,13 +715,12 @@ class Authservice
 	{
 		 $arr_data = [];
 		 $data=[];
-		 $obj_accountant =$this->MoneyDistributionModel->where('subadmin_id',session('subadmin_id'))->get();
+		 $obj_accountant =$this->MoneyDistributionModel->where('subadmin_id',session('subadmin_id'))->get()->toArray();
         // dd($obj_accountant);
         if ($obj_accountant)
         { 
-            $arr_accountant = $obj_accountant->toArray();
        
-		   $arr_responce['status'] = 'success';
+		   	$arr_responce['status'] = 'success';
 			$arr_responce['msg']	= 'Voter money Listing.';
 			$arr_responce['data']	=  $arr_accountant;
 			return $arr_responce;
